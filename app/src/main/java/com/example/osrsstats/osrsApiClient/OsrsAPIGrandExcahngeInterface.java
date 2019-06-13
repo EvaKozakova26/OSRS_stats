@@ -1,12 +1,11 @@
 package com.example.osrsstats.osrsApiClient;
 
-import com.example.osrsstats.model.grandExchange.Item;
-
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface OsrsAPIInterface {
+public interface OsrsAPIGrandExcahngeInterface {
 
     /**
      * return GE item details by given ID
@@ -14,6 +13,6 @@ public interface OsrsAPIInterface {
      * @return GE item
      */
     @GET("/api/catalogue/detail.json?item=itemId")
-    Call<Item> getItemDetails(@Query("itemId") int itemId);
+    Call<ResponseBody> getItemDetails(@Query("itemId") int itemId);
 
 }
