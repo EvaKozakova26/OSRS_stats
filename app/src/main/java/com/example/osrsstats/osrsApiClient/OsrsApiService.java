@@ -3,10 +3,12 @@ package com.example.osrsstats.osrsApiClient;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
+import com.example.osrsstats.utils.IntegerExtractorHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -43,8 +45,9 @@ public class OsrsApiService implements OsrsApiConfiguration {
             protected void onPostExecute(ResponseBody responseBody) {
                 //TODO volat (setovat) proměnnou
                 try {
-                    String hiscore = response.body() != null ? response.body().string() : null; // to avoid NPE
-                    System.out.println(hiscore);
+                    String hiscoreInString = response.body() != null ? response.body().string() : ""; // to avoid NPE
+                    List<Integer> hiscores = IntegerExtractorHelper.extractInt(hiscoreInString);
+                    System.out.println(hiscores);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
