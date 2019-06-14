@@ -3,7 +3,6 @@ package com.example.osrsstats.osrsApiClient;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
-import com.example.osrsstats.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -18,27 +17,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class OsrsApiService implements OsrsApiConfiguration {
 
     private OsrsAPIHiscorePlayerInterface service;
-
     private Call<ResponseBody> retrofitCall;
     private Response<ResponseBody> response;
 
     public OsrsApiService() {
         //basic retrofit configuration
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API_BASE_PLAYER_HISCORE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        service = retrofit.create(OsrsAPIHiscorePlayerInterface.class);
+        buildRetrofit();
     }
 
     @SuppressLint("StaticFieldLeak") //temp solution
     public void getHiscoreByPlayerName(String name) {
-        //TODO v onPostExecute vrace asi response? nebo uz vytahnout body
         new AsyncTask<String, Void, ResponseBody>() {
             @Override
             protected ResponseBody doInBackground(String... strings) {
@@ -55,7 +43,7 @@ public class OsrsApiService implements OsrsApiConfiguration {
             protected void onPostExecute(ResponseBody responseBody) {
                 //TODO volat (setovat) proměnnou
                 try {
-                    String hiscore = response.body().string();
+                    String hiscore = response.body() != null ? response.body().string() : null; // to avoid NPE
                     System.out.println(hiscore);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -64,6 +52,19 @@ public class OsrsApiService implements OsrsApiConfiguration {
             }
         }.execute(name);
 
+    }
+
+    private void buildRetrofit() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(API_BASE_PLAYER_HISCORE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        service = retrofit.create(OsrsAPIHiscorePlayerInterface.class);
     }
 
 }

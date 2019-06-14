@@ -14,5 +14,6 @@ public interface OsrsAPIHiscorePlayerInterface {
      * @return hiscore
      */
     @GET("index_lite.ws")
-    Call<ResponseBody> getHiscoreByPlayerName(@Query("player") String name); //TODO misto ResponseBody vracet uz objekt (idealne HiScore)
+    Call<ResponseBody> getHiscoreByPlayerName(@Query("player") String name);
+    // URL looks like this for Evikk26: https://secure.runescape.com/m=hiscore_oldschool/index_lite.ws?player=Evikk26
 }
