@@ -6,17 +6,28 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnScore"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="get score"
-        />
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/txtPlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/player_name"/>
+
+        <Button
+            android:id="@+id/btnScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/get_score"
+            />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txtHisore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="default"/>
+        android:text="@string/default_text"/>
 
 </LinearLayout>

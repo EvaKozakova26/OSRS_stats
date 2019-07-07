@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.osrsstats.osrsApiClient.OsrsApiService;
 
@@ -22,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                service.getHiscoreByPlayerName("Evikk26");
+                EditText txtPlayerName = findViewById(R.id.txtPlayerName);
+                service.getHiscoreByPlayerName(txtPlayerName.getText().toString());
             }
         });
 
