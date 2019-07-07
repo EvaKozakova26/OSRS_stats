@@ -3,6 +3,7 @@ package com.example.osrsstats.osrsApiClient;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
+import com.example.osrsstats.ComponentUpdateCallback;
 import com.example.osrsstats.utils.IntegerExtractorHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,7 +23,13 @@ public class OsrsApiService implements OsrsApiConfiguration {
     private Call<ResponseBody> retrofitCall;
     private Response<ResponseBody> response;
 
-    public OsrsApiService() {
+    // interface, diky kteremu se dostanu do aktivity a updatuju text
+    private ComponentUpdateCallback componentUpdateCallback;
+
+
+    public OsrsApiService(ComponentUpdateCallback componentUpdateCallback) {
+        this.componentUpdateCallback = componentUpdateCallback;
+
         //basic retrofit configuration
         buildRetrofit();
     }
@@ -48,6 +55,9 @@ public class OsrsApiService implements OsrsApiConfiguration {
                     String hiscoreInString = response.body() != null ? response.body().string() : ""; // to avoid NPE
                     List<Integer> hiscores = IntegerExtractorHelper.extractInt(hiscoreInString);
                     System.out.println(hiscores);
+                    if (componentUpdateCallback != null) {
+                        componentUpdateCallback.updateTextView(String.valueOf(hiscores));
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

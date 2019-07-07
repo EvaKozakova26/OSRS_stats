@@ -5,19 +5,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.osrsstats.osrsApiClient.OsrsApiService;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ComponentUpdateCallback {
 
     private OsrsApiService service;
+    private TextView txtScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        service = new OsrsApiService();
+        service = new OsrsApiService(this);
+
+        txtScore = findViewById(R.id.txtHiscore);
 
         Button button = findViewById(R.id.btnScore);
         button.setOnClickListener(new View.OnClickListener() {
@@ -28,7 +32,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
+    @Override
+    public void updateTextView(String myString) {
+        txtScore.setText(myString);
+    }
 }
