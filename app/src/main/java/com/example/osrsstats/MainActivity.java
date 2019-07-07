@@ -1,30 +1,34 @@
 package com.example.osrsstats;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.osrsstats.osrsApiClient.OsrsApiService;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements ComponentUpdateCallback {
 
+    @BindView(R.id.txtHiscore) TextView txtScore;
+    @BindView(R.id.btnScore) Button btnGetScore;
+
     private OsrsApiService service;
-    private TextView txtScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         service = new OsrsApiService(this);
 
-        txtScore = findViewById(R.id.txtHiscore);
-
-        Button button = findViewById(R.id.btnScore);
-        button.setOnClickListener(new View.OnClickListener() {
+        btnGetScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText txtPlayerName = findViewById(R.id.txtPlayerName);
