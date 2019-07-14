@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
 import com.example.osrsstats.ComponentUpdateCallback;
+import com.example.osrsstats.model.hiscore.HiScore;
+import com.example.osrsstats.utils.HiscoreCreatorHelper;
 import com.example.osrsstats.utils.IntegerExtractorHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,7 +56,7 @@ public class OsrsApiService implements OsrsApiConfiguration {
                 try {
                     String hiscoreInString = response.body() != null ? response.body().string() : ""; // to avoid NPE
                     List<Integer> hiscores = IntegerExtractorHelper.extractInt(hiscoreInString);
-                    System.out.println(hiscores);
+                    List<HiScore> rigthHiscore = HiscoreCreatorHelper.createHiscore(hiscores);
                     if (componentUpdateCallback != null) {
                         componentUpdateCallback.updateTextView(String.valueOf(hiscores));
                     }
