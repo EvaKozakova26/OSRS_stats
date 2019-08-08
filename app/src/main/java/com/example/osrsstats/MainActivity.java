@@ -1,5 +1,6 @@
 package com.example.osrsstats;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,17 +9,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.osrsstats.osrsApiClient.OsrsApiService;
+import com.example.osrsstats.activities.HiscoreActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements ComponentUpdateCallback {
+public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.txtHiscore) TextView txtScore;
     @BindView(R.id.btnScore) Button btnGetScore;
-
-    private OsrsApiService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,20 +24,16 @@ public class MainActivity extends AppCompatActivity implements ComponentUpdateCa
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        service = new OsrsApiService(this);
 
         btnGetScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, HiscoreActivity.class);
                 EditText txtPlayerName = findViewById(R.id.txtPlayerName);
-                service.getHiscoreByPlayerName(txtPlayerName.getText().toString());
+                intent.putExtra("playerName", txtPlayerName.getText().toString());
+                startActivity(intent);
             }
         });
 
-    }
-
-    @Override
-    public void updateTextView(String myString) {
-        txtScore.setText(myString);
     }
 }

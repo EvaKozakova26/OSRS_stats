@@ -31,7 +31,7 @@ public class HiscoreCreatorHelper {
             hiScores.add(hiScore);
         }
 
-        //for BOUNTY HUNTER and CLUE SROLLS
+        //for BOUNTY HUNTER and CLUE SCROLLS
         for (int i = 72; i <= hiscoreValues.size() - 2; i+=2) {
             HiScore hiScore = new HiScore();
             hiScore.setSkill(Objects.requireNonNull(Skills.getValue(i)).name());
