@@ -1,13 +1,15 @@
 package com.example.osrsstats;
 
+import java.util.List;
+
 /**
  * Sets values of component in Activity from other class
  */
 public interface ComponentUpdateCallback {
 
    /**
-    * Updates TextView
-    * @param text text to update
+    * Updates HiScoreData
+    * @param hiscores hiscores to update
     */
-   void updateTextView(String text);
+   void updateHiscoreData(List<Integer> hiscores);
 }

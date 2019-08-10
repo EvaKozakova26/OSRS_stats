@@ -5,23 +5,28 @@ import android.os.Bundle;
 import com.example.osrsstats.ComponentUpdateCallback;
 import com.example.osrsstats.R;
 import com.example.osrsstats.adapters.RecyclerViewAdapter;
+import com.example.osrsstats.model.hiscore.HiScore;
+import com.example.osrsstats.model.hiscore.HiScoreData;
 import com.example.osrsstats.osrsApiClient.OsrsApiService;
+import com.example.osrsstats.utils.HiscoreCreatorHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HiscoreActivity extends AppCompatActivity implements ComponentUpdateCallback {
     private TextView mTextMessage;
-
-    @BindView(R.id.txtHiscore1) TextView txtScore;
+    private RecyclerView recyclerView;
 
     //TODO mozna vyuziju, mozna ne.. :)
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -49,7 +54,8 @@ public class HiscoreActivity extends AppCompatActivity implements ComponentUpdat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hiscore);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        ButterKnife.bind(this);
+
+        initRecycleView();
 
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -60,7 +66,17 @@ public class HiscoreActivity extends AppCompatActivity implements ComponentUpdat
     }
 
     @Override
-    public void updateTextView(String text) {
-       txtScore.setText(text);
+    public void updateHiscoreData(List<Integer> hiscores) {
+        List<HiScore> rigthHiscore = HiscoreCreatorHelper.createHiscore(hiscores);
+        HiScoreData hiScoreData = new HiScoreData();
+        hiScoreData.addAll(rigthHiscore);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(hiScoreData);
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void initRecycleView() {
+        recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
     }
 }
