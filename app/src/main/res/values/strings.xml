@@ -4,7 +4,7 @@
     <string name="player_name">player name</string>
     <string name="default_text">default</string>
     <string name="title_activity_hiscore">HiscoreActivity</string>
-    <string name="title_score">Score</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_stats">Statistics</string>
+    <string name="title_grand_exchange">Grand Exchange</string>
     <string name="title_notifications">Notifications</string>
 </resources>
