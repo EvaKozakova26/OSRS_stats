@@ -15,9 +15,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
+        <activity android:name=".activities.DetailSkillActivity"></activity>
         <activity
             android:name=".activities.HiscoreActivity"
-            android:label="@string/title_activity_hiscore"></activity>
+            android:label="@string/title_activity_hiscore" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
