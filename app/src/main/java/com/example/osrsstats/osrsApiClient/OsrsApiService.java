@@ -50,7 +50,6 @@ public class OsrsApiService implements OsrsApiConfiguration {
 
             @Override
             protected void onPostExecute(ResponseBody responseBody) {
-                //TODO volat (setovat) proměnnou
                 try {
                     String hiscoreInString = response.body() != null ? response.body().string() : ""; // to avoid NPE
                     List<Integer> hiscores = IntegerExtractorHelper.extractInt(hiscoreInString);

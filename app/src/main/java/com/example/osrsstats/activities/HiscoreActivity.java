@@ -32,9 +32,9 @@ public class HiscoreActivity extends AppCompatActivity implements ComponentUpdat
 
     @Override
     public void updateHiscoreData(List<Integer> hiscores) {
-        List<HiScore> rigthHiscore = HiscoreCreatorHelper.createHiscore(hiscores);
+        List<HiScore> rightHiscore = HiscoreCreatorHelper.createHiscore(hiscores);
         HiScoreData hiScoreData = new HiScoreData();
-        hiScoreData.addAll(rigthHiscore);
+        hiScoreData.addAll(rightHiscore);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(hiScoreData);
         recyclerView.setAdapter(adapter);
     }

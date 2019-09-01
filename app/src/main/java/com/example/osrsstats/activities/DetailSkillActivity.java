@@ -5,10 +5,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import com.example.osrsstats.R;
-import com.example.osrsstats.enums.Skills;
+import com.example.osrsstats.utils.BackgroundHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,13 +29,6 @@ public class DetailSkillActivity extends AppCompatActivity {
     }
 
     private Drawable getBackground(String skill) {
-        if (skill.equals(Skills.PRAYER.name())) {
-            return ContextCompat.getDrawable(this, R.mipmap.ic_prayer);
-        }
-        if (skill.equals(Skills.AGILITY.name())) {
-            return ContextCompat.getDrawable(this, R.mipmap.ic_agility);
-        }
-
-        return null;
+        return BackgroundHelper.getBackground(skill, this);
     }
 }

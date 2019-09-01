@@ -9,14 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.osrsstats.R;
 import com.example.osrsstats.activities.DetailSkillActivity;
-import com.example.osrsstats.enums.Skills;
 import com.example.osrsstats.model.hiscore.HiScore;
 import com.example.osrsstats.model.hiscore.HiScoreData;
+import com.example.osrsstats.utils.BackgroundHelper;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.HiscoreViewHolder> {
     private HiScoreData hiScoreData;
@@ -78,14 +77,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
 
         private Drawable getBackground(String skill) {
-            if (skill.equals(Skills.PRAYER.name())) {
-                return ContextCompat.getDrawable(context, R.mipmap.ic_prayer);
-            }
-            if (skill.equals(Skills.AGILITY.name())) {
-                return ContextCompat.getDrawable(context, R.mipmap.ic_agility);
-            }
-
-            return null;
+            return BackgroundHelper.getBackground(skill, context);
         }
 
         @Override
