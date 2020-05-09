@@ -40,8 +40,6 @@ public enum Skills {
     CLUE_SCROLLS_MASTER(90);
 
 
-
-
     public final int order;
 
 
@@ -51,7 +49,7 @@ public enum Skills {
                 return e;
             }
         }
-        return null;// not found
+        return null; // not found TODO better handling to not return null or inform user about error (now might cause NPE)
     }
 
     Skills(int order) {
