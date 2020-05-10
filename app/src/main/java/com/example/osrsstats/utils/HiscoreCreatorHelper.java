@@ -6,12 +6,11 @@ import com.example.osrsstats.model.hiscore.HiScore;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class HiscoreCreatorHelper {
 
-    private static final Logger logger = LogManager.getLogManager().getLogger(HiscoreCreatorHelper.class.getName());
+    private static final Logger logger = Logger.getLogger(HiscoreCreatorHelper.class.getName());
 
     private HiscoreCreatorHelper() {
 
@@ -29,7 +28,6 @@ public class HiscoreCreatorHelper {
         // for SKILLS
         for (int i = 0; i <= hiscoreValues.size() - 23; i+=3) {
             HiScore hiScore = new HiScore();
-            System.out.println(i);
             try {
                 hiScore.setSkill(Objects.requireNonNull(Skills.getValue(i)).name());
             } catch (NullPointerException npe) {

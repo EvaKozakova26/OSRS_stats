@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HiScoreData {
-    List<HiScore> hiScoreList = new ArrayList<>();
+    private List<HiScore> hiScoreList = new ArrayList<>();
 
     public List<HiScore> getAll() {
         return hiScoreList;
