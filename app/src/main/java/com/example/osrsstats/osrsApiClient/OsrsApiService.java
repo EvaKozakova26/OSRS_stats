@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
 import com.example.osrsstats.ComponentUpdateCallback;
+import com.example.osrsstats.enums.PlayerMode;
 import com.example.osrsstats.utils.IntegerExtractorHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -30,11 +31,11 @@ public class OsrsApiService implements OsrsApiConfiguration {
     private ComponentUpdateCallback componentUpdateCallback;
 
 
-    public OsrsApiService(ComponentUpdateCallback componentUpdateCallback) {
+    public OsrsApiService(ComponentUpdateCallback componentUpdateCallback, PlayerMode mode) {
         this.componentUpdateCallback = componentUpdateCallback;
 
         //basic retrofit configuration
-        buildRetrofit();
+        buildRetrofit(mode);
     }
 
     @SuppressLint("StaticFieldLeak") //temp solution
@@ -71,17 +72,28 @@ public class OsrsApiService implements OsrsApiConfiguration {
 
     }
 
-    private void buildRetrofit() {
+    private void buildRetrofit(PlayerMode mode) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
 
+        String baseUrl = getBaseUrl(mode);
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API_BASE_PLAYER_HISCORE_URL)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         service = retrofit.create(OsrsAPIHiscorePlayerInterface.class);
+    }
+
+    private String getBaseUrl(PlayerMode mode) {
+        if (mode == PlayerMode.IRONMAN) {
+            return API_BASE_PLAYER_HISCORE_IRON_URL;
+        } else if (mode == PlayerMode.BASIC) {
+            return API_BASE_PLAYER_HISCORE_URL;
+        }
+        return API_BASE_PLAYER_HISCORE_URL;
     }
 
 }

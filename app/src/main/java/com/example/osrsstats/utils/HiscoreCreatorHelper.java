@@ -59,4 +59,13 @@ public class HiscoreCreatorHelper {
         return hiScores;
 
     }
+
+    public static HiScore getOverallHiscore(List<Integer> hiscoreValues) {
+        HiScore hiScore = new HiScore();
+        hiScore.setSkill(Skills.OVERALL.name());
+        hiScore.setRank(hiscoreValues.get(0));
+        hiScore.setLevel(hiscoreValues.get(1));
+        hiScore.setScore(hiscoreValues.get(2));
+        return hiScore;
+    }
 }

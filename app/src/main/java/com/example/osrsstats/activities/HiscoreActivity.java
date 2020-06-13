@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.osrsstats.ComponentUpdateCallback;
 import com.example.osrsstats.R;
 import com.example.osrsstats.adapters.RecyclerViewAdapter;
+import com.example.osrsstats.enums.PlayerMode;
 import com.example.osrsstats.model.hiscore.HiScore;
 import com.example.osrsstats.model.hiscore.HiScoreData;
 import com.example.osrsstats.osrsApiClient.OsrsApiService;
@@ -25,7 +26,7 @@ public class HiscoreActivity extends AppCompatActivity implements ComponentUpdat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hiscore);
         initRecycleView();
-        OsrsApiService service = new OsrsApiService(this);
+        OsrsApiService service = new OsrsApiService(this, PlayerMode.BASIC); //TODO get mode from input
         service.getHiscoreByPlayerName(getIntent().getStringExtra("playerName"));
 
     }

@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.osrsstats">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:appComponentFactory="androidx"
@@ -15,7 +13,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activities.DetailSkillActivity"></activity>
+        <activity android:name=".activities.OverallScoreActivity"></activity>
+        <activity android:name=".activities.DetailSkillActivity" />
         <activity
             android:name=".activities.HiscoreActivity"
             android:label="@string/title_activity_hiscore" />
@@ -27,5 +26,7 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

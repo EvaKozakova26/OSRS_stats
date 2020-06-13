@@ -3,7 +3,6 @@ package com.example.osrsstats;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.osrsstats.activities.HiscoreActivity;
+import com.example.osrsstats.activities.OverallScoreActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import butterknife.BindView;
@@ -53,14 +52,11 @@ public class MainActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
-        btnGetScore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, HiscoreActivity.class);
-                EditText txtPlayerName = findViewById(R.id.txtPlayerName);
-                intent.putExtra("playerName", txtPlayerName.getText().toString());
-                startActivity(intent);
-            }
+        btnGetScore.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, OverallScoreActivity.class);
+            EditText txtPlayerName = findViewById(R.id.txtPlayerName);
+            intent.putExtra("playerName", txtPlayerName.getText().toString());
+            startActivity(intent);
         });
 
     }
