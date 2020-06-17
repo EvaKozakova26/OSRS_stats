@@ -10,6 +10,7 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -28,12 +29,55 @@
             android:layout_height="wrap_content"
             android:hint="@string/player_name" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnScore"
-            android:layout_width="53dp"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@android:drawable/ic_menu_search"
-            android:background="@color/cardview_dark_background"/>
+            android:text="search"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select player mode:"></com.google.android.material.textview.MaterialTextView>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBasicMode"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:text="BASIC" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnIronmanMode"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IRONMAN" />
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
@@ -48,7 +92,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

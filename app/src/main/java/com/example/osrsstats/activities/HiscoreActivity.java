@@ -26,7 +26,7 @@ public class HiscoreActivity extends AppCompatActivity implements ComponentUpdat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hiscore);
         initRecycleView();
-        OsrsApiService service = new OsrsApiService(this, PlayerMode.BASIC); //TODO get mode from input
+        OsrsApiService service = new OsrsApiService(this, PlayerMode.BASIC.name()); //TODO get mode from input
         service.getHiscoreByPlayerName(getIntent().getStringExtra("playerName"));
 
     }

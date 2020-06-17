@@ -31,7 +31,7 @@ public class OsrsApiService implements OsrsApiConfiguration {
     private ComponentUpdateCallback componentUpdateCallback;
 
 
-    public OsrsApiService(ComponentUpdateCallback componentUpdateCallback, PlayerMode mode) {
+    public OsrsApiService(ComponentUpdateCallback componentUpdateCallback, String mode) {
         this.componentUpdateCallback = componentUpdateCallback;
 
         //basic retrofit configuration
@@ -72,7 +72,7 @@ public class OsrsApiService implements OsrsApiConfiguration {
 
     }
 
-    private void buildRetrofit(PlayerMode mode) {
+    private void buildRetrofit(String mode) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -87,10 +87,10 @@ public class OsrsApiService implements OsrsApiConfiguration {
         service = retrofit.create(OsrsAPIHiscorePlayerInterface.class);
     }
 
-    private String getBaseUrl(PlayerMode mode) {
-        if (mode == PlayerMode.IRONMAN) {
+    private String getBaseUrl(String mode) {
+        if (mode.equals(PlayerMode.IRONMAN.name())) {
             return API_BASE_PLAYER_HISCORE_IRON_URL;
-        } else if (mode == PlayerMode.BASIC) {
+        } else if (mode.equals(PlayerMode.BASIC.name())) {
             return API_BASE_PLAYER_HISCORE_URL;
         }
         return API_BASE_PLAYER_HISCORE_URL;

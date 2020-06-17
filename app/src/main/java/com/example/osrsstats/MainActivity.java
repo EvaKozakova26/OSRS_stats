@@ -11,12 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.osrsstats.activities.OverallScoreActivity;
+import com.example.osrsstats.enums.PlayerMode;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
+
+    private PlayerMode playerMode;
 
     private TextView mTextMessage;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     };
 
     @BindView(R.id.btnScore) Button btnGetScore;
+    @BindView(R.id.btnBasicMode) Button btnBasicMode;
+    @BindView(R.id.btnIronmanMode) Button btnIronmanMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +56,28 @@ public class MainActivity extends AppCompatActivity {
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        btnBasicMode.setAlpha(0.5f);
+        btnIronmanMode.setAlpha(0.5f);
+
+        btnBasicMode.setOnClickListener(view -> {
+            playerMode = PlayerMode.BASIC;
+            btnBasicMode.setAlpha(1);
+            btnIronmanMode.setAlpha(0.5f);
+        });
+        btnIronmanMode.setOnClickListener(view -> {
+            playerMode = PlayerMode.IRONMAN;
+            btnBasicMode.setAlpha(0.5f);
+            btnIronmanMode.setAlpha(1);
+        });
 
         btnGetScore.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, OverallScoreActivity.class);
             EditText txtPlayerName = findViewById(R.id.txtPlayerName);
             intent.putExtra("playerName", txtPlayerName.getText().toString());
+            intent.putExtra("playerMode", playerMode.name());
             startActivity(intent);
         });
 
     }
+
 }
