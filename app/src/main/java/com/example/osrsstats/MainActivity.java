@@ -3,8 +3,12 @@ package com.example.osrsstats;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,14 +16,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.osrsstats.activities.OverallScoreActivity;
 import com.example.osrsstats.enums.PlayerMode;
+import com.example.osrsstats.enums.Skills;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private PlayerMode playerMode;
+    private Skills skill;
 
     private TextView mTextMessage;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -75,9 +81,26 @@ public class MainActivity extends AppCompatActivity {
             EditText txtPlayerName = findViewById(R.id.txtPlayerName);
             intent.putExtra("playerName", txtPlayerName.getText().toString());
             intent.putExtra("playerMode", playerMode.name());
+            intent.putExtra("skill", skill.toString());
             startActivity(intent);
         });
 
+        Spinner spinner = findViewById(R.id.spinnerSkills);
+        String[] items = this.getResources().getStringArray(R.array.skills_array);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        Object itemAtPosition = adapterView.getItemAtPosition(i);
+        skill = Skills.valueOf(itemAtPosition.toString());
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }

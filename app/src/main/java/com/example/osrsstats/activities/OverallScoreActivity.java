@@ -34,6 +34,7 @@ public class OverallScoreActivity extends AppCompatActivity implements Component
     @BindView(R.id.txtPlayerModeOverall)
     TextView txtPlayerModeOverall;
 
+    private String skill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +42,15 @@ public class OverallScoreActivity extends AppCompatActivity implements Component
         setContentView(R.layout.activity_overall_score);
         ButterKnife.bind(this);
         OsrsApiService service = new OsrsApiService(this, getIntent().getStringExtra("playerMode"));
+        skill = getIntent().getStringExtra("skill");
         service.getHiscoreByPlayerName(getIntent().getStringExtra("playerName"));
         txtPlayerNameOverall.setText(getIntent().getStringExtra("playerName"));
-        txtPlayerModeOverall.setText(getIntent().getStringExtra("playerMode"));
+        txtPlayerModeOverall.setText(getIntent().getStringExtra("playerMode") + " - " + skill);
     }
 
     @Override
     public void updateHiscoreData(List<Integer> hiscores) {
-        HiScore hiscore = HiscoreCreatorHelper.getOverallHiscore(hiscores);
+        HiScore hiscore = HiscoreCreatorHelper.getHiscoreBySkill(hiscores, skill);
         txtOverallRank.setText(String.valueOf(hiscore.getRank()));
         txtOverallLevel.setText((hiscore.getLevel()) + " total levels");
         txtOverallScore.setText((hiscore.getScore()) + " total exps");

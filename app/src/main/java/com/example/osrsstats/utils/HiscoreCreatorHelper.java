@@ -68,4 +68,16 @@ public class HiscoreCreatorHelper {
         hiScore.setScore(hiscoreValues.get(2));
         return hiScore;
     }
+
+    public static HiScore getHiscoreBySkill(List<Integer> hiscoreValues, String skill)  {
+        Skills skills = Skills.valueOf(skill);
+        int rank = hiscoreValues.get(skills.order);
+        int level = hiscoreValues.get(skills.order + 1);
+        int score = hiscoreValues.get(skills.order + 2);
+        HiScore hiScore = new HiScore();
+        hiScore.setRank(rank);
+        hiScore.setLevel(level);
+        hiScore.setScore(score);
+        return hiScore;
+    }
 }

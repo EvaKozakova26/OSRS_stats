@@ -10,4 +10,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="skills_array">
+        <item>OVERALL</item>
+        <item>ATTACK</item>
+    </string-array>
 </resources>
