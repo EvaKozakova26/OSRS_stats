@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.osrsstats.R;
 import com.example.osrsstats.activities.DetailSkillActivity;
+import com.example.osrsstats.constants.PlayerConstants;
 import com.example.osrsstats.model.hiscore.HiScore;
 import com.example.osrsstats.model.hiscore.HiScoreData;
 import com.example.osrsstats.utils.BackgroundHelper;
@@ -44,7 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return hiScoreData.getAll().size();
     }
 
-    public class HiscoreViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class HiscoreViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView txtViewSkillName;
         private TextView txtViewRank;
         private TextView txtViewLevel;
@@ -55,7 +56,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         String skillName;
 
 
-        public HiscoreViewHolder(@NonNull View itemView) {
+        HiscoreViewHolder(@NonNull View itemView) {
             super(itemView);
             txtViewSkillName = itemView.findViewById(R.id.textViewSkillName);
             txtViewRank = itemView.findViewById(R.id.textViewRank);
@@ -67,7 +68,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             itemView.setOnClickListener(this);
         }
 
-        public void setHiscore(final HiScore hiscore) {
+        void setHiscore(final HiScore hiscore) {
             txtViewSkillName.setText(hiscore.getSkill());
             txtViewRank.setText(String.valueOf(hiscore.getRank()));
             txtViewLevel.setText(String.valueOf(hiscore.getLevel()));
@@ -83,7 +84,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, DetailSkillActivity.class);
-            intent.putExtra("skillName", skillName);
+            intent.putExtra(PlayerConstants.SKILL_NAME, skillName);
             context.startActivity(intent);
         }
     }

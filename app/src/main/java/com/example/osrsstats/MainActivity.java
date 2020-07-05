@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.osrsstats.activities.OverallScoreActivity;
+import com.example.osrsstats.constants.PlayerConstants;
 import com.example.osrsstats.enums.PlayerMode;
 import com.example.osrsstats.enums.Skills;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -79,9 +80,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         btnGetScore.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, OverallScoreActivity.class);
             EditText txtPlayerName = findViewById(R.id.txtPlayerName);
-            intent.putExtra("playerName", txtPlayerName.getText().toString());
-            intent.putExtra("playerMode", playerMode.name());
-            intent.putExtra("skill", skill.toString());
+            intent.putExtra(PlayerConstants.PLAYER_NAME, txtPlayerName.getText().toString());
+            intent.putExtra(PlayerConstants.PLAYER_MODE, playerMode.name());
+            intent.putExtra(PlayerConstants.SKILL, skill.toString());
             startActivity(intent);
         });
 

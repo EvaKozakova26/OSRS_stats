@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.osrsstats.ComponentUpdateCallback;
 import com.example.osrsstats.R;
-import com.example.osrsstats.enums.PlayerMode;
+import com.example.osrsstats.constants.PlayerConstants;
 import com.example.osrsstats.model.hiscore.HiScore;
 import com.example.osrsstats.osrsApiClient.OsrsApiService;
 import com.example.osrsstats.utils.HiscoreCreatorHelper;
@@ -41,18 +41,23 @@ public class OverallScoreActivity extends AppCompatActivity implements Component
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overall_score);
         ButterKnife.bind(this);
-        OsrsApiService service = new OsrsApiService(this, getIntent().getStringExtra("playerMode"));
-        skill = getIntent().getStringExtra("skill");
-        service.getHiscoreByPlayerName(getIntent().getStringExtra("playerName"));
-        txtPlayerNameOverall.setText(getIntent().getStringExtra("playerName"));
-        txtPlayerModeOverall.setText(getIntent().getStringExtra("playerMode") + " - " + skill);
+        String playerMode = getIntent().getStringExtra(PlayerConstants.PLAYER_MODE);
+        String playerName = getIntent().getStringExtra(PlayerConstants.PLAYER_NAME);
+        skill = getIntent().getStringExtra(PlayerConstants.SKILL);
+        OsrsApiService service = new OsrsApiService(this, playerMode);
+        service.getHiscoreByPlayerName(playerName);
+        txtPlayerNameOverall.setText(playerName);
+        String string = String.format(this.getResources().getString(R.string.player_mode_skill), playerMode, skill);
+        txtPlayerModeOverall.setText(string);
     }
 
     @Override
     public void updateHiscoreData(List<Integer> hiscores) {
         HiScore hiscore = HiscoreCreatorHelper.getHiscoreBySkill(hiscores, skill);
         txtOverallRank.setText(String.valueOf(hiscore.getRank()));
-        txtOverallLevel.setText((hiscore.getLevel()) + " total levels");
-        txtOverallScore.setText((hiscore.getScore()) + " total exps");
+        String level = String.format(this.getResources().getString(R.string.player_level), String.valueOf(hiscore.getLevel()));
+        txtOverallLevel.setText(level);
+        String score = String.format(this.getResources().getString(R.string.player_score), String.valueOf(hiscore.getScore()));
+        txtOverallScore.setText(score);
     }
 }

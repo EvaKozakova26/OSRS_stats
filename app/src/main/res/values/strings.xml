@@ -8,6 +8,11 @@
     <string name="title_grand_exchange">Grand Exchange</string>
     <string name="title_notifications">Notifications</string>
 
+
+    <string name="player_mode_skill">%s - %s</string>
+    <string name="player_level">%s total levels</string>
+    <string name="player_score">%s total exps</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.osrsstats.R;
+import com.example.osrsstats.constants.PlayerConstants;
 import com.example.osrsstats.utils.BackgroundHelper;
 
 import butterknife.BindView;
@@ -23,7 +24,7 @@ public class DetailSkillActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_skill);
         ButterKnife.bind(this);
 
-        String skillName = getIntent().getStringExtra("skillName");
+        String skillName = getIntent().getStringExtra(PlayerConstants.SKILL_NAME);
 
         skillImage.setBackground(getBackground(skillName));
     }
