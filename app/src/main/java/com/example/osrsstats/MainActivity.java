@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.osrsstats.activities.OverallScoreActivity;
+import com.example.osrsstats.constants.ErrorConstants;
 import com.example.osrsstats.constants.PlayerConstants;
 import com.example.osrsstats.enums.PlayerMode;
 import com.example.osrsstats.enums.Skills;
@@ -77,15 +78,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             btnIronmanMode.setAlpha(1);
         });
 
-        btnGetScore.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, OverallScoreActivity.class);
-            EditText txtPlayerName = findViewById(R.id.txtPlayerName);
-            intent.putExtra(PlayerConstants.PLAYER_NAME, txtPlayerName.getText().toString());
-            intent.putExtra(PlayerConstants.PLAYER_MODE, playerMode.name());
-            intent.putExtra(PlayerConstants.SKILL, skill.toString());
-            startActivity(intent);
-        });
+        btnGetScore.setOnClickListener(view -> handleDataForwarding());
+        initSpinnerSkills();
+    }
 
+    private void handleDataForwarding() {
+        Intent intent = new Intent(MainActivity.this, OverallScoreActivity.class);
+        EditText txtPlayerName = findViewById(R.id.txtPlayerName);
+        if (txtPlayerName.getText().toString().equals("")) {
+            btnGetScore.setFocusableInTouchMode(true);
+            btnGetScore.setFocusable(true);
+            btnGetScore.setError(ErrorConstants.ERR_EMPTY_NAME);
+        } else {
+            intent.putExtra(PlayerConstants.PLAYER_NAME, txtPlayerName.getText().toString());
+            if (playerMode != null) {
+                intent.putExtra(PlayerConstants.PLAYER_MODE, playerMode.name());
+                intent.putExtra(PlayerConstants.SKILL, skill.toString());
+                startActivity(intent);
+            } else {
+                btnGetScore.setFocusableInTouchMode(true);
+                btnGetScore.setFocusable(true);
+                btnGetScore.setError(ErrorConstants.ERR_EMPTY_MODE);
+            }
+        }
+    }
+
+    private void initSpinnerSkills() {
         Spinner spinner = findViewById(R.id.spinnerSkills);
         String[] items = this.getResources().getStringArray(R.array.skills_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
