@@ -24,6 +24,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Main Activity - starting point of whole application.
+ * Player enters his name, chooses player mode and skill.
+ * After search, activity is redirected to {@link OverallScoreActivity}
+ *
+ * @author Eva Kozakova
+ */
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private PlayerMode playerMode;
@@ -67,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         btnBasicMode.setAlpha(0.5f);
         btnIronmanMode.setAlpha(0.5f);
 
+        // set of player mode
         btnBasicMode.setOnClickListener(view -> {
             playerMode = PlayerMode.BASIC;
             btnBasicMode.setAlpha(1);
@@ -78,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             btnIronmanMode.setAlpha(1);
         });
 
+        // forwarding to OverallScoreActivity
         btnGetScore.setOnClickListener(view -> handleDataForwarding());
         initSpinnerSkills();
     }

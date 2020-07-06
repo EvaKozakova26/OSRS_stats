@@ -13,6 +13,7 @@ import com.example.osrsstats.utils.BackgroundHelper;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+@Deprecated
 public class DetailSkillActivity extends AppCompatActivity {
 
     @BindView(R.id.txtSkillImage)

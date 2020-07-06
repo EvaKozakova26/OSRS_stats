@@ -18,6 +18,7 @@ import com.example.osrsstats.utils.HiscoreCreatorHelper;
 
 import java.util.List;
 
+@Deprecated
 public class HiscoreActivity extends AppCompatActivity implements ComponentUpdateCallback {
 
     private RecyclerView recyclerView;

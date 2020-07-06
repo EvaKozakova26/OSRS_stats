@@ -18,6 +18,7 @@ import com.example.osrsstats.model.hiscore.HiScore;
 import com.example.osrsstats.model.hiscore.HiScoreData;
 import com.example.osrsstats.utils.BackgroundHelper;
 
+@Deprecated
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.HiscoreViewHolder> {
     private HiScoreData hiScoreData;
 

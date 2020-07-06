@@ -17,6 +17,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Overall Score Actvity - shows score - rank, level, experience points.
+ * It shows either overall score or score for specific skill - depends on player input from {@link com.example.osrsstats.MainActivity}
+ *
+ * @author Eva Kozakova
+ */
 public class OverallScoreActivity extends AppCompatActivity implements ComponentUpdateCallback {
 
     @BindView(R.id.txtFieldOverallRank)
@@ -41,17 +47,23 @@ public class OverallScoreActivity extends AppCompatActivity implements Component
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overall_score);
         ButterKnife.bind(this);
+
+        // get data from intent (from previous activity, in this case MainActivity)
         String playerMode = getIntent().getStringExtra(PlayerConstants.PLAYER_MODE);
         String playerName = getIntent().getStringExtra(PlayerConstants.PLAYER_NAME);
         skill = getIntent().getStringExtra(PlayerConstants.SKILL);
+
+        // fetch data from API
         OsrsApiService service = new OsrsApiService(this, playerMode);
         service.getHiscoreByPlayerName(playerName);
+
         txtPlayerNameOverall.setText(playerName);
         String string = String.format(this.getResources().getString(R.string.player_mode_skill), playerMode, skill);
         txtPlayerModeOverall.setText(string);
     }
 
     @Override
+    // called from OsrsApiService during fetching of data from API
     public void updateHiscoreData(List<Integer> hiscores) {
         HiScore hiscore = HiscoreCreatorHelper.getHiscoreBySkill(hiscores, skill);
         txtOverallRank.setText(String.valueOf(hiscore.getRank()));

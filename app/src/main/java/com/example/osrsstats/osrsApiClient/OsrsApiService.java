@@ -19,6 +19,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Service for fetchin OSRS API
+ * TODO consider https://api.osrsbox.com/index.html
+ *
+ * @author Eva Kozakova
+ */
 public class OsrsApiService implements OsrsApiConfiguration {
 
     private Logger logger = Logger.getLogger(OsrsApiService.class.getName());
